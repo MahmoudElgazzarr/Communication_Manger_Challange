@@ -4,11 +4,12 @@
  *  Created on: Apr 14, 2019
  *      Author: AVE-LAP-040
  */
-
+#include "stdbool.h"
 #include <stdint.h>
 #include "Com_Manger_Cfg.h"
 #include "Router.h"
 #include "Com_Manger.h"
+#include "driverlib/uart.h"
 
 /*Signal Buffer*/
 uint8_t Signals[Num_Signal];
@@ -35,7 +36,7 @@ void Com_Init(void)
     for (i = 0; i < Num_Pdu; i++)
     {
         /*Add Header Of PDU Signal To The PDU */
-        Data_To_Send[i] |= PDU_Arr[i].PDU_ID;
+        Data_To_Send[i] = PDU_Arr[i].PDU_ID;
     }
 }
 
@@ -90,15 +91,21 @@ static uint8_t Concatenate(uint8_t Signal_ID)
     /*Search For PDU ID For The Signal*/
     for(index=0;index<Num_Signal;index++)
     {
-        /*search for index in the arr*/
+        /*search for index in the arr of signals*/
         if(Signal_ID == Signals_Arr[index].Signal_ID)
         {
             PDU_ID = Signals_Arr[index].PDU_ID;
         }
     }
     /*Concatenate Data*/
+    /*Todo Protect OTher Signals If Data IS Wrong*/
      PDU_Arr[PDU_ID].SDU |= (uint8_t)((Signals[Signal_ID]) << (Signals_Arr[Signal_ID].Start_Bit));
-     Data_To_Send[PDU_ID] |=  (PDU_Arr[PDU_ID].SDU >> 2);
+
+     /*Add ID To The SDU*/
+     Data_To_Send[PDU_ID] |=  (PDU_Arr[PDU_ID].SDU);
+
+     /*Send Over UART*/
+     UARTprintf("Data = %3d \r",Data_To_Send[PDU_ID]);
 }
 
 static uint8_t Segment()

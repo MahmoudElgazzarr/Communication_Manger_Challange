@@ -24,5 +24,18 @@ void RouterRecive_Data()
 void RouterSend_Data(uint8_t Data)
 {
     /*Todo Check Which Channel To Send To*/
-    SPI0_Send(Data);
+    uint8_t PDU_ID = (Data >> 6);
+    switch (PDU_ID)
+    {
+    case ID_0:
+        SPI0_Send(Data);
+        break;
+    case ID_1:
+        SPI0_Send(Data);
+                break;
+    case ID_2:
+        SPI0_Send(Data);
+                break;
+    }
+
 }
