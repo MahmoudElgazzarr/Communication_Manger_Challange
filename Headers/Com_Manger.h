@@ -8,10 +8,13 @@
 #ifndef HEADERS_COM_MANGER_H_
 #define HEADERS_COM_MANGER_H_
 
-void Com _Init();
+void Com_Init(void);
 void Com_Send_Signal(uint8_t ID,uint8_t data);
-uint8_t Com_Recive_Signal(ID);
+uint8_t Com_Recive_Signal(uint8_t ID);
 
+/*Periodic Tasks That Sends And Recives*/
+void Com_Main_Tx();
+void Com_Main_Rx();
 
 
 #endif /* HEADERS_COM_MANGER_H_ */

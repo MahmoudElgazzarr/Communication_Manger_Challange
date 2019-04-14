@@ -5,6 +5,13 @@
  *      Author: AVE-LAP-040
  */
 
+
+/*Router Init*/
+void Router_Init()
+{
+
+}
+
 /*Router Recive Function*/
 void RouterRecive()
 {

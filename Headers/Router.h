@@ -8,6 +8,10 @@
 #ifndef HEADERS_ROUTER_H_
 #define HEADERS_ROUTER_H_
 
+
+/*Router Init*/
+void Router_Init();
+
 /*Router Recive Function*/
 void RouterRecive();
 
