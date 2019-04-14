@@ -11,6 +11,7 @@
 #include "utils/uartstdio.h"
 #include "Task.h"
 #include "led_task.h"
+#include "Spi.h"
 
 #ifdef DEBUG
 void
@@ -26,6 +27,12 @@ int main(void)
 
     //ROM_SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
     //SYSCTL_OSC_MAIN);
+
+    /*Inalize SPI*/
+    SPI0_Master_Init();
+    /*Inatilalieze Com Module*/
+    Com_Init();
+    /***/
 
     /*Create Init Task For Led*/
     xTaskCreate(LEDS_Task_init, (const portCHAR *) "LED_Init", 128, NULL, 13, NULL);

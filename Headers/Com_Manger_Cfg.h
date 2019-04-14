@@ -9,22 +9,24 @@
 #define HEADERS_COM_MANGER_CFG_H_
 
 
-#define Num_Signal 3
-#define Num_Pdu 3
+#define Num_Signal 1
+#define Num_Pdu 2
+#define Com_Task_Periodicity 5
 
 /*Structure For PDU*/
 typedef struct PDU_S
 {
-    uint8_t ID;
+    uint8_t PDU_ID;
     uint8_t SDU;
     uint8_t Periodicity;
     uint8_t Priority;
+    uint8_t Remaining_Ticks;
 }PDU_S_T;
 
 /*Structure For Signals*/
 typedef struct Signal_S
 {
-    uint8_t ID;
+    uint8_t Signal_ID;
     uint8_t Length;
     uint8_t Start_Bit;
     uint8_t PDU_ID;
@@ -85,5 +87,10 @@ enum Start_Bit
     Bit5,
     Bit6,
     Bit7,
+};
+enum Remaining_Ticks
+{
+    Remaining_5MS = 5,
+    Remaining_10MS = 10,
 };
 #endif /* HEADERS_COM_MANGER_CFG_H_ */

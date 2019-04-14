@@ -13,10 +13,10 @@
 void Router_Init();
 
 /*Router Recive Function*/
-void RouterRecive();
+void RouterRecive_Data();
 
 /*Router Send Function*/
-void RouterSend();
+void RouterSend_Data();
 
 
 #endif /* HEADERS_ROUTER_H_ */
