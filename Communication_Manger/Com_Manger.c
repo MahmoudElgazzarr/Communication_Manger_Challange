@@ -10,6 +10,7 @@
 #include "Router.h"
 #include "Com_Manger.h"
 #include "driverlib/uart.h"
+#include "BitwiseOperation.h"
 
 /*Signal Buffer*/
 uint8_t Signals[Num_Signal];
@@ -96,6 +97,14 @@ static uint8_t Concatenate(uint8_t Signal_ID)
         {
             PDU_ID = Signals_Arr[index].PDU_ID;
         }
+    }
+    /*Clear Bit That Need To be Concatinataed*/
+    uint8_t Bit_Number;
+    /*Mask Data That Need To Be Concatinated*/
+    for(Bit_Number=0;Bit_Number<Signals_Arr[Signal_ID].Length;Bit_Number++)
+    {
+        /*Clear Bits*/
+        Clear_Bit(Signals[Signal_ID] , Bit_Number + Signals_Arr[Signal_ID].Start_Bit );
     }
     /*Concatenate Data*/
     /*Todo Protect OTher Signals If Data IS Wrong*/
