@@ -1,9 +1,3 @@
-/*
- * Manager.c
- *
- *  Created on: Mar 20, 2019
- *      Author: AVE-LAP-062
- */
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -49,9 +43,8 @@ uint8_t Get_Distance(void)
      {
         xQueueReceive(xUartRecv,&duty_Cycle,10);
         xEventGroupSetBits(xBtnEventGroup, DISTANCE_FLAG);
+
         /* Equation */
-
-
         Total_Time = ( 1000000 / ULTRASONIC_FREQUANCY );
         ULTRASONIC_Echo_Pulse = duty_Cycle * Total_Time ;
         /*OUT Of Range*/
@@ -61,12 +54,10 @@ uint8_t Get_Distance(void)
         }
         else
         {
-            /*Distance in Cm */
+            /*Distance in CM */
             Distance = (uint8_t)( (ULTRASONIC_Echo_Pulse * 0.0343) / 2 );
-
+            Distance = Distance / 8.5;
         }
-
      }
     return Distance ;
 }
-

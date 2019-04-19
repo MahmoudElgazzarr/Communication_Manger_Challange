@@ -66,7 +66,7 @@
  * See http://www.freertos.org/a00110.html.
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION                0
+#define configUSE_PREEMPTION                1
 #define configUSE_IDLE_HOOK                 0
 #define configUSE_TICK_HOOK                 0
 #define configCPU_CLOCK_HZ                  ( ( unsigned long ) 50000000 )
@@ -80,7 +80,7 @@
 #define configUSE_CO_ROUTINES               0
 #define configUSE_MUTEXES                   1
 #define configUSE_RECURSIVE_MUTEXES         1
-#define configCHECK_FOR_STACK_OVERFLOW      0
+#define configCHECK_FOR_STACK_OVERFLOW      2
 
 #define configMAX_PRIORITIES                16
 #define configMAX_CO_ROUTINE_PRIORITIES     ( 2 )

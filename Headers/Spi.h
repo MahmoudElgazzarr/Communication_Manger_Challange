@@ -12,6 +12,5 @@
 extern void SPI0_Master_Init(void);
 extern void SPI0_Send(uint8_t data_to_send);
 extern uint32_t SPI3_Recieve(void);
-extern void SpiSend_Task(void *pvParameters);
 
 #endif /* INCLUDES_SPI_H_ */

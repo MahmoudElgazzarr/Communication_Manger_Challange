@@ -1,7 +1,4 @@
 
-
-
-
 #include <FreeRTOS.h>
 #include <stdint.h>
 #include "task.h"

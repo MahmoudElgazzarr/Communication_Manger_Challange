@@ -8,4 +8,10 @@
 #include "stdint.h"
 #include "Router_Cfg.h"
 
-uint8_t Channel_Arr[] = {{0,0},{1,0},{2,0},{3,1}};
+
+
+PDU_T PDUS_Arr[NUM_OF_PDUS] =
+        { { PDU_ID0, Phyiscal_ID0, SPI },
+          { PDU_ID1, Phyiscal_ID1, SPI },
+          { PDU_ID2, Phyiscal_ID2, SPI },
+          { PDU_ID3, Phyiscal_ID3, SPI } };

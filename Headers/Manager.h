@@ -8,7 +8,7 @@
 #ifndef MANAGER_MANAGER_H_
 #define MANAGER_MANAGER_H_
 
-uint8_t Get_Distance(void);
+uint8_t Get_Distance();
 #define DISTANCE_FLAG   ( 1 << 0 )
 
 #endif /* MANAGER_MANAGER_H_ */

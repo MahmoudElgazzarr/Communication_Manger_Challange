@@ -8,8 +8,7 @@
 #ifndef HEADERS_COM_MANGER_CFG_H_
 #define HEADERS_COM_MANGER_CFG_H_
 
-
-#define Num_Signal 1
+#define Num_Signal 2
 #define Num_Pdu 2
 #define Com_Task_Periodicity 5
 

@@ -8,12 +8,6 @@
 #ifndef HEADERS_ROUTER_H_
 #define HEADERS_ROUTER_H_
 
-enum IDS
-{
-    ID_0,
-    ID_1,
-    ID_2,
-};
 /*Router Init*/
 void Router_Init();
 
@@ -21,7 +15,7 @@ void Router_Init();
 void RouterRecive_Data();
 
 /*Router Send Function*/
-void RouterSend_Data(uint8_t Data);
+void PduR_ComTransmit(uint8_t PduId,uint8_t SDU);
 
 
 #endif /* HEADERS_ROUTER_H_ */

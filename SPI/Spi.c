@@ -15,11 +15,13 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/ssi.h"
 #include "utils/uartstdio.h"
+#include "Spi.h"
+/*FreeRtos Includes*/
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
 #include "semphr.h"
-#include "Spi.h"
+
 
 /*******************************************************************/
 /* SPI0_Master_Init                                                */
