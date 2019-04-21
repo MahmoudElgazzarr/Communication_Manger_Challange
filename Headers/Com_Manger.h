@@ -12,8 +12,9 @@ void Com_Init(void);
 void Com_Send_Signal(uint8_t ID,uint8_t data);
 uint8_t Com_Recive_Signal(uint8_t ID);
 
-/*Periodic Tasks That Sends And Recives*/
+/*Periodic Tasks That Sends And Receive*/
 void Com_Main_Tx();
+void Com_Main_Rx_Task(void *pv);
 
 /*Com Manger Send Task*/
 void Com_Main_Tx_Task();

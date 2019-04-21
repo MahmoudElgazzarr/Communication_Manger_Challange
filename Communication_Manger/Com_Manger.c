@@ -114,7 +114,7 @@ void Com_Main_Rx()
     Segment(Data_Received_Logical_ID, Data_Received);
 }
 /*Rx Task*/
-void Com_Main_Rx_Task(void)
+void Com_Main_Rx_Task(void *pv)
 {
     while (1)
     {
