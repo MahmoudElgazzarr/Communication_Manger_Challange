@@ -8,8 +8,12 @@
 #ifndef HEADERS_COM_MANGER_CFG_H_
 #define HEADERS_COM_MANGER_CFG_H_
 
+
 #define Num_Signal 2
+/*Num Of PDUS Sent*/
 #define Num_Pdu 2
+
+/*Created Task Preiodicity*/
 #define Com_Task_Periodicity 5
 
 /*Structure For PDU*/

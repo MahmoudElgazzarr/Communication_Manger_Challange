@@ -23,9 +23,28 @@ void Router_Init()
 /*Router Recive Function*/
 void RouterRecive_Data()
 {
+    uint8_t UART_PDU_ID_Received = 0;
     uint8_t UART_Data_Received = 0;
     xQueueReceive(xUartRecv, &UART_Data_Received, 10);
-    /*Todo*/
+    /*Received ID*/
+    UART_PDU_ID_Received =  ( UART_Data_Received >> ( 8 - UART_ID_BITS_NUM ) );
+
+    /*Search For PDU ID*/
+    uint8_t index;
+    uint8_t PDU_Index_In_Arr;
+
+    /*Get PDU ID in which Array Index*/
+    for(index = 0;index<NUM_OF_PDUS_Received;index++)
+    {
+        if(PDUS_Arr[index].Physical_ID == UART_PDU_ID_Received)
+        {
+            PDU_Index_In_Arr = index;
+            break;
+        }
+    }
+    /*Convert Phyiscal ID To Logical ID*/
+    UART_Data_Received |= PDUS_Arr[PDU_Index_In_Arr].PDU_ID;
+    return UART_Data_Received;
 }
 
 /*Router Send Function*/
@@ -35,6 +54,7 @@ void PduR_ComTransmit(uint8_t PduId,uint8_t SDU)
     uint8_t index;
     uint8_t PDU_Index_In_Arr;
 
+    /*Get PDU ID in which Array Index*/
     for(index = 0;index<NUM_OF_PDUS;index++)
     {
         if(PDUS_Arr[index].PDU_ID == PduId)
@@ -43,6 +63,7 @@ void PduR_ComTransmit(uint8_t PduId,uint8_t SDU)
             break;
         }
     }
+    /*Chose Which channel To Transmit Over Dependant on Configuration*/
     switch (PDUS_Arr[PDU_Index_In_Arr].channel)
     {
     case SPI:

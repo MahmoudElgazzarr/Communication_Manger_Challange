@@ -60,8 +60,6 @@ void FSM_Handler_Task(void *pvParameters)
 
     while (1)
     {
-        Com_Send_Signal(Signal_ID0, 5);
-        Com_Send_Signal(Signal_ID1, 6);
         /* Get Distance */
         Distance = Get_Distance();
         /* Check for DistEventFlag */

@@ -93,10 +93,14 @@ void Com_Main_Rx()
 {
 
 }
-
+/*Rx Task*/
 void Com_Main_Rx_Task(void)
 {
-
+    while(1)
+    {
+        Com_Main_Rx();
+        vTaskDelay(5);
+    }
 }
 static void Concatenate(uint8_t Signal_ID)
 {

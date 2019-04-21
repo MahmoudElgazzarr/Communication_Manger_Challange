@@ -8,8 +8,13 @@
 #ifndef HEADERS_ROUTER_CFG_H_
 #define HEADERS_ROUTER_CFG_H_
 
+/*Num Of PDUS Sent*/
 #define NUM_OF_PDUS 5
 
+/*Num Of PDUS Received*/
+#define NUM_OF_PDUS_Received 1
+
+/*The Number Of ID Bits In Data Sent*/
 #define UART_ID_BITS_NUM 1
 #define SPI_ID_BITS_NUM 2
 
