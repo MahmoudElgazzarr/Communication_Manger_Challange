@@ -124,7 +124,7 @@ void UartRecv_Task(void *pvParameters)
         if(UARTCharsAvail(UART0_BASE))
         {
             data = UART0_Recv();
-            xQueueSendToBack(xUartRecv, &data , 10 );
+                xQueueSendToBack(xUartRecv, &data , 10 );
         }
         vTaskDelay(50);
     }

@@ -8,7 +8,7 @@
 #ifndef HEADERS_COM_MANGER_CFG_H_
 #define HEADERS_COM_MANGER_CFG_H_
 
-
+/*Number Of Singnals Sent*/
 #define Num_Signal 2
 
 /*Num Of PDUS Sent*/
@@ -18,7 +18,7 @@
 #define Num_Pdu_Received 1
 
 /*Num Of Received Signals*/
-#define Num_Signal_Received 1
+#define Num_Signal_Received 2
 
 /*Created Task Preiodicity*/
 #define Com_Task_Periodicity 50
@@ -82,6 +82,7 @@ enum Priority
 };
 enum Length
 {
+    Length_1Bit = 1,
     Length_2Bit = 2,
     Length_3Bit,
     Length_4Bit,
