@@ -12,7 +12,7 @@
 void Router_Init();
 
 /*Router Recive Function*/
-uint8_t RouterRecive_Data();
+uint8_t PduR_Recive_Data();
 
 /*Router Send Function*/
 void PduR_ComTransmit(uint8_t PduId,uint8_t SDU);
