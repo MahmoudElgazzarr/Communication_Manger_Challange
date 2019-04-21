@@ -13,6 +13,8 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/debug.h"
 #include "Manager.h"
+#include "Com_Manger_Cfg.h"
+#include "Com_Manger.h"
 
 extern QueueHandle_t xUartRecv ;
 extern EventGroupHandle_t xBtnEventGroup;
@@ -29,8 +31,8 @@ extern EventGroupHandle_t xBtnEventGroup;
 /*******************************************************************/
 uint8_t Get_Distance(void)
 {
-    /*varibable to hold data Recived From UART Which Represents Duty Cycle*/
-    uint8_t duty_Cycle=0;
+    /*Get Data Received Which is From UART*/
+    uint8_t duty_Cycle = Com_Recive_Signal(Signal_ID0);
 
     /*Variable To Save Echo Recived From ULTRASONIC*/
     double ULTRASONIC_Echo_Pulse;
@@ -39,11 +41,11 @@ uint8_t Get_Distance(void)
     /*Variable To hold value of distance Calculated*/
     uint8_t Distance = 1;
 
-    if(uxQueueMessagesWaiting(xUartRecv))
+    /*If Received Data*/
+    uint8_t Received_Data_Flag = 1;
+    if(Received_Data_Flag == 1)
      {
-        xQueueReceive(xUartRecv,&duty_Cycle,10);
         xEventGroupSetBits(xBtnEventGroup, DISTANCE_FLAG);
-
         /* Equation */
         Total_Time = ( 1000000 / ULTRASONIC_FREQUANCY );
         ULTRASONIC_Echo_Pulse = duty_Cycle * Total_Time ;

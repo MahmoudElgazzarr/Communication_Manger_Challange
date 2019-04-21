@@ -156,6 +156,7 @@ static void Segment(uint8_t Data_Received_Logical_ID,uint8_t Data_Received)
     /*Update Signals*/
     uint8_t PDU_INDEX_IN_ARR = 0;
     uint8_t index;
+    uint8_t Local_Signal_R;
     /*Search For PDU ID For The Signal*/
     for (index = 0; index < Num_Pdu_Received ; index++)
     {
@@ -175,11 +176,14 @@ static void Segment(uint8_t Data_Received_Logical_ID,uint8_t Data_Received)
         {
             /*Put Signal Into It's Place*/
             /*Shift Right With Start Bit To Remove Other Signals*/
-            Signals_Received[index] = (PDU_Arr_Received[PDU_INDEX_IN_ARR].SDU >> Signals_Received_Arr[index].Start_Bit);
+            Local_Signal_R = (PDU_Arr_Received[PDU_INDEX_IN_ARR].SDU >> Signals_Received_Arr[index].Start_Bit);
             /*Shift Left To Remove Signals To The Right*/
-            Signals_Received[index] = (PDU_Arr_Received[PDU_INDEX_IN_ARR].SDU << ( 8 - Signals_Received_Arr[index].Length ));
+            Local_Signal_R = (Local_Signal_R << ( 8 - Signals_Received_Arr[index].Length ));
             /*Align Signal Wanted*/
-            Signals_Received[index] = (PDU_Arr_Received[PDU_INDEX_IN_ARR].SDU >> ( 8 - Signals_Received_Arr[index].Length ));
+            if(Local_Signal_R != 0 )
+            {
+                Signals_Received[index] = (Local_Signal_R >> ( 8 - Signals_Received_Arr[index].Length ));
+            }
         }
     }
 }

@@ -87,6 +87,7 @@ enum Length
     Length_4Bit,
     Length_5Bit,
     Length_6Bit,
+    Length_7Bit,
 };
 enum Start_Bit
 {
