@@ -11,6 +11,7 @@
 #include "queue.h"
 #include "Router_Cfg.h"
 #include "Router.h"
+#include "BitwiseOperation.h"
 
 extern xQueueHandle xUartRecv;
 extern PDU_T PDUS_Arr[NUM_OF_PDUS];
@@ -21,18 +22,21 @@ void Router_Init()
 }
 
 /*Router Recive Function*/
-void RouterRecive_Data()
+uint8_t RouterRecive_Data()
 {
+    /*UART PDU ID*/
     uint8_t UART_PDU_ID_Received = 0;
+    /*Data Received From UART*/
     uint8_t UART_Data_Received = 0;
+    /*Read Data From UART Queue*/
     xQueueReceive(xUartRecv, &UART_Data_Received, 10);
     /*Received ID*/
     UART_PDU_ID_Received =  ( UART_Data_Received >> ( 8 - UART_ID_BITS_NUM ) );
 
     /*Search For PDU ID*/
     uint8_t index;
+    /*Index Of PDU In Arr*/
     uint8_t PDU_Index_In_Arr;
-
     /*Get PDU ID in which Array Index*/
     for(index = 0;index<NUM_OF_PDUS_Received;index++)
     {
@@ -43,7 +47,9 @@ void RouterRecive_Data()
         }
     }
     /*Convert Phyiscal ID To Logical ID*/
-    UART_Data_Received |= PDUS_Arr[PDU_Index_In_Arr].PDU_ID;
+    Clear_Bit(UART_Data_Received,8);
+    UART_Data_Received |= (PDUS_Arr[PDU_Index_In_Arr].PDU_ID<<7);
+    /*Return UART PDU Received*/
     return UART_Data_Received;
 }
 

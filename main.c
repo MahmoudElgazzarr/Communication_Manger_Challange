@@ -54,14 +54,19 @@ int main(void)
     Com_Init();
 
 
-    /*Buttons Task*/
-    xTaskCreate(Btn1_Task,"Btn1_Task",128,NULL,2,NULL);
-    /*Uart Task*/
-    xTaskCreate(UartRecv_Task,"Uart_Task",128,NULL,3,NULL);
+    /*Buttons Task That Suspend After Pressing The Button*/
+    xTaskCreate(Btn1_Task,"Button Task",128,NULL,2,NULL);
+
+    /*Uart Task Receive , Task Instead Of ISR*/
+    xTaskCreate(UartRecv_Task,"UART Task",128,NULL,3,NULL);
+
     /*FSM Task*/
     xTaskCreate(FSM_Handler_Task,"FSM",128,NULL,4,NULL);
+
     /*Create a Task For The Com Manger*/
      xTaskCreate(Com_Main_Tx_Task,"Com_Manger Send Task",128,NULL,1,NULL);
+
+     /*Todo Com Receive Task That Receives From UART*/
 
     /*Start Schedular*/
     vTaskStartScheduler();

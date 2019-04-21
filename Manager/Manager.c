@@ -56,7 +56,6 @@ uint8_t Get_Distance(void)
         {
             /*Distance in CM */
             Distance = (uint8_t)( (ULTRASONIC_Echo_Pulse * 0.0343) / 2 );
-            Distance = Distance / 8.5;
         }
      }
     return Distance ;

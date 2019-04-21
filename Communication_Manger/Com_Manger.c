@@ -57,7 +57,7 @@ void Com_Send_Signal(uint8_t ID, uint8_t data)
 /*Function That Is Called By App*/
 uint8_t Com_Recive_Signal(uint8_t ID)
 {
-    return 0;
+    return Signals[ID];
 }
 
 /*Periodic Task That Sends Data Periodicity*/
@@ -84,14 +84,22 @@ void Com_Main_Tx_Task()
     while(1)
     {
         Com_Main_Tx();
-        vTaskDelay(5);
+        vTaskDelay(300);
     }
 }
 
 /*Periodic Task That Recives Data Perioducaly Data Periodicaly*/
 void Com_Main_Rx()
 {
-
+    uint8_t Data_Received;
+    uint8_t Data_Received_Logical_ID = 0;
+    /*Read Data Recived From Router*/
+    Data_Received = RouterRecive_Data();
+    /*Get Logical ID*/
+    Data_Received_Logical_ID = ( Data_Received >> 7 );
+    /*Get Signals In PDU*/
+    /*Todo In SPI Receive*/
+    /*Update Signals*/
 }
 /*Rx Task*/
 void Com_Main_Rx_Task(void)

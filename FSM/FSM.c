@@ -83,6 +83,7 @@ void FSM_Handler_Task(void *pvParameters)
             {
                 CurrentState = Brake;
                 /*Send Two Signals*/
+                Distance = Distance / 8.5;
                 Com_Send_Signal(Signal_ID0, CurrentState);
                 Com_Send_Signal(Signal_ID1, Distance);
             }
@@ -90,6 +91,7 @@ void FSM_Handler_Task(void *pvParameters)
             {
                 CurrentState = DecreaseSpeed;
                 /*Send Two Signals*/
+                Distance = Distance / 8.5;
                 Com_Send_Signal(Signal_ID0, CurrentState);
                 Com_Send_Signal(Signal_ID1, Distance);
             }
@@ -97,6 +99,7 @@ void FSM_Handler_Task(void *pvParameters)
             {
                 CurrentState = MaintainSpeed;
                 /*Send Two Signals*/
+                Distance = Distance / 8.5;
                 Com_Send_Signal(Signal_ID0, CurrentState);
                 Com_Send_Signal(Signal_ID1, Distance);
             }
@@ -104,6 +107,7 @@ void FSM_Handler_Task(void *pvParameters)
             {
                 CurrentState = IncreaseSpeed;
                 /*Send Two Signals*/
+                Distance = Distance / 8.5;
                 Com_Send_Signal(Signal_ID0, CurrentState);
                 Com_Send_Signal(Signal_ID1, Distance);
             }
@@ -119,6 +123,7 @@ void FSM_Handler_Task(void *pvParameters)
                 {
                     CurrentState = FireAirbag;
                     /*Send Two Signals*/
+                    Distance = Distance / 8.5;
                     Com_Send_Signal(Signal_ID0, CurrentState);
                     Com_Send_Signal(Signal_ID1, Distance);
                 }
@@ -126,6 +131,7 @@ void FSM_Handler_Task(void *pvParameters)
                 {
                     CurrentState = Brake;
                     /*Send Two Signals*/
+                    Distance = Distance / 8.5;
                     Com_Send_Signal(Signal_ID0, CurrentState);
                     Com_Send_Signal(Signal_ID1, Distance);
                 }
@@ -133,6 +139,7 @@ void FSM_Handler_Task(void *pvParameters)
                 {
                     CurrentState = DecreaseSpeed;
                     /*Send Two Signals*/
+                    Distance = Distance / 8.5;
                     Com_Send_Signal(Signal_ID0, CurrentState);
                     Com_Send_Signal(Signal_ID1, Distance);
                 }
@@ -140,6 +147,7 @@ void FSM_Handler_Task(void *pvParameters)
                 {
                     CurrentState = MaintainSpeed;
                     /*Send Two Signals*/
+                    Distance = Distance / 8.5;
                     Com_Send_Signal(Signal_ID0, CurrentState);
                     Com_Send_Signal(Signal_ID1, Distance);
                 }
@@ -147,6 +155,7 @@ void FSM_Handler_Task(void *pvParameters)
                 {
                     CurrentState = IncreaseSpeed;
                     /*Send Two Signals*/
+                    Distance = Distance / 8.5;
                     Com_Send_Signal(Signal_ID0, CurrentState);
                     Com_Send_Signal(Signal_ID1, Distance);
                 }

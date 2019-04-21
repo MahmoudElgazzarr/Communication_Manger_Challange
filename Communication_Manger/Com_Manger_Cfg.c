@@ -8,7 +8,7 @@
 #include "Com_Manger_Cfg.h"
 
 /*Array Of PDUS*/
-PDU_S_T PDU_Arr[Num_Pdu] = {{PDU_ID0,0,Periodicity_5MS,Priority1,Remaining_5MS},{PDU_ID1,0,Periodicity_5MS,Priority1,Remaining_5MS}};
+PDU_S_T PDU_Arr[Num_Pdu] = {{PDU_ID0,0,Periodicity_50MS,Priority1,Remaining_50MS},{PDU_ID1,0,Periodicity_50MS,Priority1,Remaining_50MS}};
 
 
 /*Array Of Signals*/

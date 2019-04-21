@@ -126,6 +126,6 @@ void UartRecv_Task(void *pvParameters)
             data = UART0_Recv();
             xQueueSendToBack(xUartRecv, &data , 10 );
         }
-        vTaskDelay(UART_PERIODICITY);
+        vTaskDelay(50);
     }
 }

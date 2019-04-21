@@ -14,7 +14,7 @@
 #define Num_Pdu 2
 
 /*Created Task Preiodicity*/
-#define Com_Task_Periodicity 5
+#define Com_Task_Periodicity 50
 
 /*Structure For PDU*/
 typedef struct PDU_S
@@ -63,6 +63,7 @@ enum Periodicity
 {
     Periodicity_5MS = 5,
     Periodicity_10MS = 10,
+    Periodicity_50MS = 50,
 };
 enum Priority
 {
@@ -95,5 +96,6 @@ enum Remaining_Ticks
 {
     Remaining_5MS = 5,
     Remaining_10MS = 10,
+    Remaining_50MS = 50,
 };
 #endif /* HEADERS_COM_MANGER_CFG_H_ */
