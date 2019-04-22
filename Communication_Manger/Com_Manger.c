@@ -150,8 +150,7 @@ static void Concatenate(uint8_t Signal_ID)
     }
     /*Concatenate Data*/
     /*Todo Protect OTher Signals If Data IS Wrong*/
-    PDU_Arr[PDU_ID_COM].SDU |= (uint8_t) ((Signals[Signal_ID])
-            << (Signals_Arr[Signal_ID].Start_Bit));
+    PDU_Arr[PDU_ID_COM].SDU |= (uint8_t) ((Signals[Signal_ID]) << (Signals_Arr[Signal_ID].Start_Bit));
 
     /*Add ID To The SDU*/
     Data_To_Send[PDU_ID_COM] |= (PDU_Arr[PDU_ID_COM].SDU);
@@ -175,6 +174,7 @@ static void Segment(uint8_t Data_Received_Logical_ID, uint8_t Data_Received)
     }
     /*Put Data Into SDU*/
     PDU_Arr_Received[PDU_INDEX_IN_ARR].SDU = Data_Received;
+
     /*Search For The Signals In PDU & Segment PDU To Signals*/
     for (index = 0; index < Num_Signal_Received; index++)
     {

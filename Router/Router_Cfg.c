@@ -17,5 +17,6 @@ PDU_T PDUS_Arr[NUM_OF_PDUS] =
 };
 PDU_T PDUS_Received_Arr[NUM_OF_PDUS_Received] =
 {
-    {  PDU_ID4, Phyiscal_ID4, UART},
+       {PDU_ID0, Phyiscal_ID0, UART},
+       {PDU_ID1, Phyiscal_ID1, UART}
 };

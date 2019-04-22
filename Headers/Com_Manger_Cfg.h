@@ -15,10 +15,10 @@
 #define Num_Pdu 2
 
 /*NUM PDUS Received*/
-#define Num_Pdu_Received 1
+#define Num_Pdu_Received 2
 
 /*Num Of Received Signals*/
-#define Num_Signal_Received 2
+#define Num_Signal_Received 3
 
 /*Created Task Preiodicity*/
 #define Com_Task_Periodicity 50

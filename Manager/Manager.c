@@ -1,4 +1,3 @@
-
 #include <stdbool.h>
 #include <stdint.h>
 #include "inc/hw_memmap.h"
@@ -17,7 +16,7 @@
 #include "Com_Manger.h"
 #include "UART.h"
 
-extern QueueHandle_t xUartRecv ;
+extern QueueHandle_t xUartRecv;
 extern EventGroupHandle_t xBtnEventGroup;
 
 #define ULTRASONIC_FREQUANCY 6700
@@ -34,12 +33,34 @@ uint8_t Get_Distance(void)
 {
     /*Get Data Received Which is From UART*/
     uint8_t duty_Cycle = Com_Recive_Signal(Signal_ID0);
-    uint8_t Object_Detected = Com_Recive_Signal(Signal_ID1);
+
+    /*If Object Detected Or Not*/
+    uint8_t Object_Detected = Com_Recive_Signal(Signal_ID0);
+
+    /*Which Type*/
+    uint8_t Object_Type = Com_Recive_Signal(Signal_ID3);
 
     /*If Object Detected*/
-    if(Object_Detected == 1)
+    if (Object_Detected == 1)
     {
+        /*Print O IF Object Detected*/
         UART0_Send('O');
+        /*Which Object Is Detected*/
+        switch (Object_Type)
+        {
+        case 0:
+            UART0_Send('A');
+            break;
+        case 1:
+            UART0_Send('B');
+            break;
+        case 2:
+            UART0_Send('C');
+            break;
+        case 3:
+            UART0_Send('D');
+            break;
+        }
     }
 
     /*Variable To Save Echo Recived From ULTRASONIC*/
@@ -51,22 +72,22 @@ uint8_t Get_Distance(void)
 
     /*If Received Data*/
     uint8_t Received_Data_Flag = 1;
-    if(Received_Data_Flag == 1)
-     {
+    if (Received_Data_Flag == 1)
+    {
         xEventGroupSetBits(xBtnEventGroup, DISTANCE_FLAG);
         /* Equation */
-        Total_Time = ( 1000000 / ULTRASONIC_FREQUANCY );
-        ULTRASONIC_Echo_Pulse = duty_Cycle * Total_Time ;
+        Total_Time = (1000000 / ULTRASONIC_FREQUANCY);
+        ULTRASONIC_Echo_Pulse = duty_Cycle * Total_Time;
         /*OUT Of Range*/
         if ((ULTRASONIC_Echo_Pulse < 150) || (ULTRASONIC_Echo_Pulse > 16000))
         {
-            Distance = 1 ;
+            Distance = 1;
         }
         else
         {
             /*Distance in CM */
-            Distance = (uint8_t)( (ULTRASONIC_Echo_Pulse * 0.0343) / 2 );
+            Distance = (uint8_t) ((ULTRASONIC_Echo_Pulse * 0.0343) / 2);
         }
-     }
-    return Distance ;
+    }
+    return Distance;
 }
