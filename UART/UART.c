@@ -21,6 +21,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
+#include "uartstdio.h"
 
 
 volatile uint8_t UART_Flag = 0 ;
@@ -28,84 +29,6 @@ volatile uint8_t DataToSend = 0 ;
 extern QueueHandle_t xUartRecv ;
 
 #define UART_PERIODICITY 10
-
-/*******************************************************************/
-/* UART0_init                                                      */
-/* Parameters : N/A                                                */
-/* I/p : N/A                                                       */
-/* O/p : N/A                                                       */
-/* Return : void                                                   */
-/* fn that init  on UART0                                          */
-/*******************************************************************/
-void UART0_init(void)
-{
-    //
-        // Enable the UART0 module.
-        //
-        //
-        // Enable the GPIOB peripheral
-        //
-        SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-        //
-        // Wait for the GPIOB module to be ready.
-        //
-        while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOA))
-        {
-        }
-
-        /* Configure GPIO Port B pins 0 and 1 to be used as UART1.*/
-        GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-        //
-        // Enable UART1 functionality on GPIO Port B pins 0 and 1.
-        //
-        GPIOPinConfigure(GPIO_PA0_U0RX);
-        GPIOPinConfigure(GPIO_PA1_U0TX);
-
-        SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-
-        /* Wait for the UART0 module to be ready. */
-        while(!SysCtlPeripheralReady(SYSCTL_PERIPH_UART0))
-        {
-        }
-        // Initialize the UART. Set the baud rate, number of data bits, turn off
-        // parity, number of stop bits, and stick mode. The UART is enabled by the
-        // function call.
-        //
-        UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 38400,
-        (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
-        UART_CONFIG_PAR_NONE));
-}
-
-/*******************************************************************/
-/* UART0_Send                                                      */
-/* Parameters : N/A                                                */
-/* I/p : N/A                                                       */
-/* O/p : N/A                                                       */
-/* Return : void                                                   */
-/* fn that send data on UART0                                      */
-/*******************************************************************/
-void UART0_Send(uint8_t data)
-{
-  UARTCharPut(UART0_BASE, data);
-}
-
-/*******************************************************************/
-/* UART0_Recv                                                      */
-/* Parameters : N/A                                                */
-/* I/p : N/A                                                       */
-/* O/p : N/A                                                       */
-/* Return : void                                                   */
-/* fn that recv data on UART0                                      */
-/*******************************************************************/
-uint8_t UART0_Recv(void)
-{
-    uint8_t data = 0;
-    if(UARTCharsAvail(UART0_BASE))
-    {
-        data = UARTCharGetNonBlocking(UART0_BASE);
-    }
-    return data ;
-}
 
 /*******************************************************************/
 /* UartRecv_Task                                                   */
@@ -117,15 +40,54 @@ uint8_t UART0_Recv(void)
 /*******************************************************************/
 void UartRecv_Task(void *pvParameters)
 {
+    static uint8_t data_UART = 0 ;
     vTaskDelay(500);
     while(1)
     {
-        uint8_t data = 0 ;
+        data_UART = 0;
         if(UARTCharsAvail(UART0_BASE))
         {
-            data = UART0_Recv();
-                xQueueSendToBack(xUartRecv, &data , 10 );
+            data_UART = UARTgetc();
+            xQueueSendToBack(xUartRecv, &data_UART , 10 );
         }
         vTaskDelay(50);
     }
+}
+
+void InitConsole(void)
+{
+    //
+    // Enable GPIO port A which is used for UART0 pins.
+    // TODO: change this to whichever GPIO port you are using.
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+    //
+    // Configure the pin muxing for UART0 functions on port A0 and A1.
+    // This step is not necessary if your part does not support pin muxing.
+    // TODO: change this to select the port/pin you are using.
+    //
+    GPIOPinConfigure(GPIO_PA0_U0RX);
+    GPIOPinConfigure(GPIO_PA1_U0TX);
+
+    //
+    // Enable UART0 so that we can configure the clock.
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+
+    //
+    // Use the internal 16MHz oscillator as the UART clock source.
+    //
+    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+
+    //
+    // Select the alternate (UART) function for these pins.
+    // TODO: change this to select the port/pin you are using.
+    //
+    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+    //
+    // Initialize the UART for console I/O.
+    //
+    UARTStdioConfig(0, 115200, 16000000);
 }

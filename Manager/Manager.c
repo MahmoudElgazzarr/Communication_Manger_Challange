@@ -14,7 +14,7 @@
 #include "Manager.h"
 #include "Com_Manger_Cfg.h"
 #include "Com_Manger.h"
-#include "UART.h"
+#include "uartstdio.h"
 
 extern QueueHandle_t xUartRecv;
 extern EventGroupHandle_t xBtnEventGroup;
@@ -35,34 +35,33 @@ uint8_t Get_Distance(void)
     uint8_t duty_Cycle = Com_Recive_Signal(Signal_ID0);
 
     /*If Object Detected Or Not*/
-    uint8_t Object_Detected = Com_Recive_Signal(Signal_ID0);
+    uint8_t Object_Detected = Com_Recive_Signal(Signal_ID1);
 
     /*Which Type*/
-    uint8_t Object_Type = Com_Recive_Signal(Signal_ID3);
+    uint8_t Object_Type = Com_Recive_Signal(Signal_ID2);
 
     /*If Object Detected*/
     if (Object_Detected == 1)
     {
         /*Print O IF Object Detected*/
-        UART0_Send('O');
+        UARTprintf("Object Detected\n:");
         /*Which Object Is Detected*/
         switch (Object_Type)
         {
-        case 0:
-            UART0_Send('A');
-            break;
         case 1:
-            UART0_Send('B');
+            UARTprintf("Car\n");
             break;
         case 2:
-            UART0_Send('C');
+            UARTprintf("Horse\n");
             break;
         case 3:
-            UART0_Send('D');
+            UARTprintf("Truck\n");
+            break;
+        case 4:
+            UARTprintf("Building\n");
             break;
         }
     }
-
     /*Variable To Save Echo Recived From ULTRASONIC*/
     double ULTRASONIC_Echo_Pulse;
     double Total_Time;

@@ -21,6 +21,6 @@ PDU_S_T PDU_Arr_Received[Num_Pdu_Received] = { { PDU_ID0, 0, Periodicity_50MS, P
 
 /*Array Of Signals Received*/
 Signal_S_T Signals_Received_Arr[Num_Signal_Received] = { { Signal_ID0,Length_6Bit,Bit0, PDU_ID0 },
-                                                         { Signal_ID1, Length_1Bit,Bit7,PDU_ID0 },
+                                                         { Signal_ID1, Length_1Bit,Bit6,PDU_ID0 },
                                                          { Signal_ID2,Length_7Bit, Bit0,PDU_ID1 } };
 

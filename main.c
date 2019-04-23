@@ -47,7 +47,7 @@ int main(void)
     /*Init Buttons*/
     Btns_Init();
     /*Uart init*/
-    UART0_init();
+    InitConsole();
     /*Inalize SPI*/
     SPI0_Master_Init();
     /*Inatilalieze Com Module*/

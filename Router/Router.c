@@ -12,6 +12,7 @@
 #include "Router_Cfg.h"
 #include "Router.h"
 #include "BitwiseOperation.h"
+#include "uartstdio.h"
 
 /*Queue To Put Data Received From UART*/
 extern xQueueHandle xUartRecv;
@@ -96,7 +97,7 @@ void PduR_ComTransmit(uint8_t PduId, uint8_t SDU)
         SDU |=
                 (PDUS_Arr[PDU_Index_In_Arr].Physical_ID
                         << (8 - UART_ID_BITS_NUM));
-        UART0_Send(SDU);
+        UARTprintf(SDU);
         break;
     }
 
